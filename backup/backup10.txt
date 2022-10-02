@@ -1,0 +1,126 @@
+const input = document.querySelector(".input")
+const input2 = document.querySelector(".input2")
+const btn = document.querySelector(".btn")
+const btn2 = document.querySelector(".btn2")
+const letters = document.querySelector(".letters")
+let lives = document.querySelector(".lives")
+let spanEl = document.getElementsByTagName("span")
+const img = document.querySelector(".img")
+const win = document.querySelector(".win")
+const resBtn = document.querySelector(".restartBtn")
+let startGame = true;
+
+let wordArray = []
+let lettersArray = []
+let newElArray = []
+let newEl2Array = []
+let livesNo = ''
+let imgMistake = 6
+let lastArray = []
+btn.addEventListener("click", function() {
+
+
+  if (startGame === true) {
+    const word = input.value
+    img.setAttribute("src", "images/pic.jpg")
+    btn.textContent = "Try"
+    const wordChar = word.split("")
+    lives.textContent = word.length
+    livesNo = word.length
+    startGame = false
+    btn.classList.add("btn2")
+    btn.classList.remove("btn")
+
+
+    // input.classList.remove("input")
+    createLetters(word, wordChar)
+    tryyy(word, wordArray, lettersArray)
+
+    function createLetters(word, wordChar) {
+
+      for (let i = 0; i < word.length; i++) {
+
+        wordArray.push(wordChar[i])
+        let newEl = document.createElement("span")
+        newEl.textContent = "?"
+        letters.appendChild(newEl)
+        newEl.classList.add("newElClass")
+        let newEl2 = document.createElement("span")
+        newEl2.textContent = wordChar[i]
+        letters.appendChild(newEl2)
+        newEl2.classList.add("hidden", "newEl2Class")
+        newEl2Array.push(newEl2.innerText)
+
+      }
+
+    }
+  }
+
+
+
+})
+
+
+
+
+function tryyy(word, wordArray, lettersArray) {
+
+  btn2.addEventListener("click", function() {
+    console.log(input.value.length);
+    if (input.value.length !== 1) {
+      alert("Please add one character")
+    } else {
+      const newNew = document.querySelectorAll(".newEl2Class")
+      const newNew2 = document.querySelectorAll(".newElClass")
+      for (let i = 0; i < wordArray.length; i++) {
+        // if (wordArray[i] === lastArray[i]) {
+        //   alert("won")
+        // }
+
+        if (newNew[i].textContent == input.value) {
+          newNew[i].classList.remove("hidden")
+          newNew2[i].classList.add("hidden")
+        }
+      }
+      lettersArray.push(input.value)
+      const lettersPop = lettersArray.pop()
+
+
+      if (wordArray.includes(lettersPop)) {
+        alert("ok")
+        lastArray.push(lettersPop)
+        console.log(lastArray);
+        if (newEl2Array.length === lastArray.length) {
+          win.textContent = "ODI DEDI NA KOPAN"
+        }
+      } else if (lives.innerText > 1) {
+        lives.innerText--
+        img.setAttribute("src", `images/pic${imgMistake}.jpg`)
+        imgMistake--
+      } else {
+
+        lives.innerText--
+        win.innerText = "You lost, baybe!"
+        resBtn.removeAttribute("class", "restartBtn")
+      }
+    }
+
+
+  })
+
+
+
+}
+
+function gameRestart(){
+  startGame = true;
+  wordArray = []
+  lettersArray = []
+  newElArray = []
+  newEl2Array = []
+  livesNo = ''
+  imgMistake = 6
+  lastArray = []
+  letters.innerHTML = "";
+  img.setAttribute("src", "images/pic.jpg")
+}

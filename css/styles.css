@@ -1,0 +1,76 @@
+body {
+  text-align: center;
+  margin: 0;
+}
+
+.container {
+  box-sizing: border-box;
+  width: 100vw;
+  height: 600px;
+  padding: 2rem 10rem;
+  background-color: grey;
+  background-image: url("../images/worms.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: soft-light;
+  color: white;
+  text-shadow: #fc0 1px 0 10px;
+}
+
+h1 {
+  margin-bottom: 2rem;
+  font-size: 4rem;
+}
+
+span {
+  display: inline-block;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  text-decoration: underline;
+  font-size: 2rem;
+}
+
+.counter {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+p {
+  margin-top: 2rem;
+  font-size: 2rem;
+  margin-bottom: -1rem;
+}
+
+.lives {
+  font-size: 4rem;
+}
+
+img {
+  margin-top: 2rem;
+  max-width: 30rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.win {
+  margin-bottom: 1rem;
+}
+
+.hideRestartBtn {
+  margin-top: 5rem;
+  display: none;
+  padding: 1rem 1rem;
+}
+
+@media (max-height: 900px) {
+  .container {
+    padding: 1rem;
+  }
+  img {
+    max-width: 15rem;
+  }
+}
